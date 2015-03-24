@@ -30,14 +30,14 @@ done
 # Get standard environment variables
 PRGDIR=`dirname "$PRG"`
 
-# Only set ORIENTDB2_HOME if not already set
-[ -f "$ORIENTDB2_HOME"/bin/server.sh ] || ORIENTDB2_HOME=`cd "$PRGDIR/.." ; pwd`
-export ORIENTDB2_HOME
-cd "$ORIENTDB2_HOME/bin"
+# Only set ORIENTDB_HOME if not already set
+[ -f "$ORIENTDB_HOME"/bin/server.sh ] || ORIENTDB_HOME=`cd "$PRGDIR/.." ; pwd`
+export ORIENTDB_HOME
+cd "$ORIENTDB_HOME/bin"
 
 if [ ! -f "${CONFIG_FILE}" ]
 then
-  CONFIG_FILE=$ORIENTDB2_HOME/config/orientdb-server-config.xml
+  CONFIG_FILE=$ORIENTDB_HOME/config/orientdb-server-config.xml
 fi
 
 # Set JavaHome if it exists
@@ -48,16 +48,16 @@ else
 fi
 export JAVA
 
-LOG_FILE=$ORIENTDB2_HOME/config/orientdb-server-log.properties
+LOG_FILE=$ORIENTDB_HOME/config/orientdb-server-log.properties
 LOG_LEVEL=warning
-WWW_PATH=$ORIENTDB2_HOME/www
+WWW_PATH=$ORIENTDB_HOME/www
 JAVA_OPTS=-Djava.awt.headless=true
 
-"$JAVA" -client $JAVA_OPTS -Dorientdb.config.file="$CONFIG_FILE" -cp "$ORIENTDB2_HOME/lib/orientdb-tools-2.0.5.jar:$ORIENTDB2_HOME/lib/*" com.orientechnologies.orient.server.OServerShutdownMain $*
+"$JAVA" -client $JAVA_OPTS -Dorientdb.config.file="$CONFIG_FILE" -cp "$ORIENTDB_HOME/lib/orientdb-tools-2.0.5.jar:$ORIENTDB_HOME/lib/*" com.orientechnologies.orient.server.OServerShutdownMain $*
 
 if [ "x$wait" = "xyes" ] ; then
   while true ; do
-    ps -ef | grep java | grep $ORIENTDB2_HOME/lib/orientdb-server > /dev/null || break
+    ps -ef | grep java | grep $ORIENTDB_HOME/lib/orientdb-server > /dev/null || break
     sleep 1;
   done
 fi
