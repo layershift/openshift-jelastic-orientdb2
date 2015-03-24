@@ -22,9 +22,9 @@ done
 # Get standard environment variables
 PRGDIR=`dirname "$PRG"`
 
-# Only set ORIENTDB_HOME if not already set
-[ -f "$ORIENTDB_HOME"/lib/orientdb-etl-@VERSION@.jar ] || ORIENTDB_HOME=`cd "$PRGDIR/.." ; pwd`
-export ORIENTDB_HOME
+# Only set ORIENTDB2_HOME if not already set
+[ -f "$ORIENTDB2_HOME"/lib/orientdb-etl-@VERSION@.jar ] || ORIENTDB2_HOME=`cd "$PRGDIR/.." ; pwd`
+export ORIENTDB2_HOME
 
 # Set JavaHome if it exists
 if [ -f "${JAVA_HOME}/bin/java" ]; then 
@@ -34,12 +34,12 @@ else
 fi
 export JAVA
 
-ORIENTDB_SETTINGS="-Djava.util.logging.config.file="$ORIENTDB_HOME/config/orientdb-client-log.properties" -Djava.awt.headless=true"
+ORIENTDB2_SETTINGS="-Djava.util.logging.config.file="$ORIENTDB2_HOME/config/orientdb-client-log.properties" -Djava.awt.headless=true"
 #JAVA_OPTS=-Xmx1024m
-KEYSTORE=$ORIENTDB_HOME/config/cert/orientdb-console.ks
+KEYSTORE=$ORIENTDB2_HOME/config/cert/orientdb-console.ks
 KEYSTORE_PASS=password
-TRUSTSTORE=$ORIENTDB_HOME/config/cert/orientdb-console.ts
+TRUSTSTORE=$ORIENTDB2_HOME/config/cert/orientdb-console.ts
 TRUSTSTORE_PASS=password
 SSL_OPTS="-Xmx512m -Dclient.ssl.enabled=false -Djavax.net.ssl.keyStore=$KEYSTORE -Djavax.net.ssl.keyStorePassword=$KEYSTORE_PASS -Djavax.net.ssl.trustStore=$TRUSTSTORE -Djavax.net.ssl.trustStorePassword=$TRUSTSTORE_PASS"
 
-$JAVA -server $JAVA_OPTS $ORIENTDB_SETTINGS $SSL_OPTS -Dfile.encoding=utf-8 -Dorientdb.build.number="@BUILD@" -cp "$ORIENTDB_HOME/lib/*" com.orientechnologies.orient.etl.OETLProcessor $*
+$JAVA -server $JAVA_OPTS $ORIENTDB2_SETTINGS $SSL_OPTS -Dfile.encoding=utf-8 -Dorientdb.build.number="@BUILD@" -cp "$ORIENTDB2_HOME/lib/*" com.orientechnologies.orient.etl.OETLProcessor $*
