@@ -4,8 +4,8 @@
 # Copyright (c) Orient Technologies LTD (http://www.orientechnologies.com)
 
 # You have to SET the OrientDB installation directory here
-ORIENTDB2_DIR="YOUR_ORIENTDB_INSTALLATION_PATH"
-ORIENTDB2_USER="USER_YOU_WANT_ORIENTDB_RUN_WITH"
+ORIENTDB_DIR="YOUR_ORIENTDB_INSTALLATION_PATH"
+ORIENTDB_USER="USER_YOU_WANT_ORIENTDB_RUN_WITH"
 
 usage() {
 	echo "Usage: `basename $0`: <start|stop|status>"
@@ -20,8 +20,8 @@ start() {
 		return $PID
 	fi
 	echo "Starting OrientDB server daemon..."
-	cd "$ORIENTDB2_DIR/bin"
-	su $ORIENTDB2_USER -c "cd \"$ORIENTDB2_DIR/bin\"; /usr/bin/nohup ./server.sh 1>../log/orientdb.log 2>../log/orientdb.err &"
+	cd "$ORIENTDB_DIR/bin"
+	su $ORIENTDB_USER -c "cd \"$ORIENTDB_DIR/bin\"; /usr/bin/nohup ./server.sh 1>../log/orientdb.log 2>../log/orientdb.err &"
 }
 
 stop() {
@@ -33,7 +33,7 @@ stop() {
 	fi
 	echo "Stopping OrientDB server daemon..."
 	cd "$ORIENTDB2_DIR/bin"
-	su $ORIENTDB2_USER -c "cd \"$ORIENTDB2_DIR/bin\"; /usr/bin/nohup ./shutdown.sh 1>>../log/orientdb.log 2>>../log/orientdb.err &"
+	su $ORIENTDB_USER -c "cd \"$ORIENTDB_DIR/bin\"; /usr/bin/nohup ./shutdown.sh 1>>../log/orientdb.log 2>>../log/orientdb.err &"
 }
 
 status() {
