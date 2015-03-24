@@ -1,6 +1,6 @@
-Name: orientDB2
-Cartridge-Short-Name: ORIENTDB2
-Display-Name: ORIENTDB2
+Name: orientDB
+Cartridge-Short-Name: ORIENTDB
+Display-Name: ORIENTDB
 Description: "OrientDB is an Open Source NoSQL DBMS with the features of both Document and Graph DBMSs."
 Version: '2.0.5'
 License: GNU GENERAL PUBLIC LICENSE
