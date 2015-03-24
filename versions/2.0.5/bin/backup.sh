@@ -46,9 +46,9 @@ done
 # Get standard environment variables
 PRGDIR=`dirname "$PRG"`
 
-# Only set ORIENTDB_HOME if not already set
-[ -f "$ORIENTDB_HOME"/bin/orient.sh ] || ORIENTDB_HOME=`cd "$PRGDIR/.." ; pwd`
-export ORIENTDB_HOME
+# Only set ORIENTDB2_HOME if not already set
+[ -f "$ORIENTDB2_HOME"/bin/orient.sh ] || ORIENTDB2_HOME=`cd "$PRGDIR/.." ; pwd`
+export ORIENTDB2_HOME
 
 
 if [ "$#" != "5" ] || [ "$5" = "default" ]
@@ -96,7 +96,7 @@ then
 	DB_PATH=`echo $DB | awk -F ':' '{print $2}'`
 	FREEZE=false
 else
-	DB_PATH="$ORIENTDB_HOME/databases/$DB_NAME"
+	DB_PATH="$ORIENTDB2_HOME/databases/$DB_NAME"
 	FREEZE=true
 fi
 TMP_PATH=`pwd`
