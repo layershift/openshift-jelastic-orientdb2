@@ -6,7 +6,7 @@ SED=$(which sed);
 # config optimizer for neo4j
 #
 
-ORIENTDB_RUN_SCRIPT="${OPENSHIFT_ORIENTDB_DIR}/versions/1.7.4/bin/server.sh";
+ORIENTDB2_RUN_SCRIPT="${OPENSHIFT_ORIENTDB2_DIR}/versions/2.0.5/bin/server.sh";
 
  [ -z "$XMS" ] && { XMS=32m; }
  memory_total=`free -m | grep Mem | awk '{print $2}'`;
