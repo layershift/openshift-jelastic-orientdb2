@@ -30,7 +30,7 @@ stop() {
                 return 0
         fi
         echo "Stopping OrientDB server daemon..."
-        cd $ORIENTDB2_DIR/bin && /usr/bin/nohup ./shutdown.sh 1>>${OPENSHIFT2_ORIENTDB_LOG_DIR}/orientdb.log 2>>${OPENSHIFT_ORIENTDB2_LOG_DIR}/orientdb.err 
+        cd $ORIENTDB2_DIR/bin && /usr/bin/nohup ./shutdown.sh 1>>${OPENSHIFT_ORIENTDB2_LOG_DIR}/orientdb.log 2>>${OPENSHIFT_ORIENTDB2_LOG_DIR}/orientdb.err 
 }
 
 status() {
