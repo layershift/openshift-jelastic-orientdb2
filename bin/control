@@ -3,11 +3,11 @@
 # OrientDB init script
 
 # You have to SET the OrientDB installation directory here
-ORIENTDB_DIR="${OPENSHIFT_ORIENTDB_DIR}/versions/2.0.5"
+ORIENTDB_DIR="${OPENSHIFT_ORIENTDB_DIR}/versions/2.05"
 ORIENTDB_USER="jelastic"
 
 usage() {
-	echo "Usage: `basename $0`: <start|stop|status>"
+	echo "Usage: `basename $0`: <start|stop|status|restart>"
 	exit 1
 }
 
@@ -30,8 +30,14 @@ stop() {
                 return 0
         fi
         echo "Stopping OrientDB server daemon..."
-        cd $ORIENTDB_DIR/bin && /usr/bin/nohup ./shutdown.sh 1>>${OPENSHIFT_ORIENTDB_LOG_DIR}/orientdb.log 2>>${OPENSHIFT_ORIENTDB_LOG_DIR}/orientdb.err 
+        cd $ORIENTDB_DIR/bin && /usr/bin/nohup ./shutdown.sh 1>>${OPENSHIFT_ORIENTDB_LOG_DIR}/orientdb.log 2>>${OPENSHIFT_ORIENTDB_LOG_DIR}/orientdb.err
+        sleep 1;
+	local odbproc=`ps aux|grep 'orientdb\|control start'|grep -v grep|awk '{print $2}'`;
+  	[ -n "$odbproc" ] && kill -9 $odbproc > /dev/null 2>&1;
+  	odbproc=`ps aux|grep 'orientdb\|control start'|grep -v grep|awk '{print $2}'`;
+  	[ -z "$odbproc" ] && { echo "Orientdb has been stopped successfully"; return 0; } || { echo "Orientdb hasn't been stopped"; return 1; }; 
 }
+
 
 status() {
 	PID=`ps -ef | grep 'orientdb.www.path' | grep java | grep -v grep | awk '{print $2}'`
@@ -66,6 +72,14 @@ then
 		echo "OrientDB server daemon is NOT running"
 	fi
 	exit $PID
+fi
+
+if [ "x$1" = "xrestart" ]
+then
+        stop
+	sleep 7
+	start
+        exit 0
 fi
 
 usage
