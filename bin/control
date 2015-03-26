@@ -3,7 +3,7 @@
 # OrientDB init script
 
 # You have to SET the OrientDB installation directory here
-ORIENTDB_DIR="${OPENSHIFT_ORIENTDB_DIR}/versions/2.05"
+ORIENTDB_DIR="${OPENSHIFT_ORIENTDB_DIR}/versions/2.0.5"
 ORIENTDB_USER="jelastic"
 
 usage() {
